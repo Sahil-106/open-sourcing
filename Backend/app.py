@@ -14,11 +14,11 @@ def extract_repo_info(repo):
         'url': repo['html_url'],
         'tech_stack': repo['language']
     }
-access_token=os.environ.get('git_token')
+access_token="os.environ.get('git_token')"
 
 @app.route('/')
 def index():
-    return 'Hello, World!'
+    return 'index page'
 
 @app.route('/repositories')
 def fetch_open_source_repositories():
@@ -33,7 +33,6 @@ def fetch_open_source_repositories():
     }
     try:
         response = requests.get(url, headers=headers, params=params)
-        # Check if the request was successful
         if response.status_code == 200:
             repositories = response.json()['items']
             repo_info = [extract_repo_info(repo) for repo in repositories]
@@ -44,4 +43,4 @@ def fetch_open_source_repositories():
         return f"Error fetching repositories: {e}", 500
 
 if __name__ == '__main__':
-    app.run(debug=True,port=8080)
+    app.run()

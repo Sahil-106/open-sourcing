@@ -14,7 +14,7 @@ def extract_repo_info(repo):
         'url': repo['html_url'],
         'tech_stack': repo['language']
     }
-access_token="os.environ.get('git_token')"
+access_token=os.environ.get('git_token')
 
 @app.route('/')
 def index():

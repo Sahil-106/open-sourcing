@@ -1,26 +1,48 @@
-import react,{ useEffect,useState} from 'react';
+import { useEffect,useState} from 'react';
 import './App.css';
 
 function App() {
-  const[data,setData]=useState({})
-  useEffect(()=>{
-    fetchData();
-  },[]);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const fetchData = async()=>{
-    try{
-      const response= await fetch('https://fuzzy-giggle-5gqvrj495666cvq4j-5000.app.github.dev/repositories');
-      const jsondata=await response.json();
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch('https://open-sourcing.onrender.com/repositories');
+      if (!response.ok) {
+        throw new Error('Failed to fetch data');
+      }
+      const jsondata = await response.json();
       setData(jsondata);
-    }
-    catch(error){
-      console.log(error)
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
     }
   }
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <div className="App">
-       <h7>{data}</h7>
-      
+      {data && data.map(repo => (
+        <div key={repo.name}>
+          <h3>{repo.name}</h3>
+          <p>{repo.description}</p>
+          <a href={repo.url}>Visit Repository</a>
+          <p>Tech Stack: {repo.tech_stack}</p>
+        </div>
+      ))}
     </div>
   );
 }

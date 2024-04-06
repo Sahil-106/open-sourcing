@@ -1,49 +1,18 @@
-import { useEffect,useState} from 'react';
+import React from 'react';
 import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Landingpage from './Pages/Landingpage/Landingpage';
+import Datapage from './Pages/Datapage/Datapage';
 
 function App() {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    try {
-      const response = await fetch('https://open-sourcing.onrender.com/repositories');
-      if (!response.ok) {
-        throw new Error('Failed to fetch data');
-      }
-      const jsondata = await response.json();
-      setData(jsondata);
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
   return (
-    <div className="App">
-      {data && data.map(repo => (
-        <div key={repo.name}>
-          <h3>{repo.name}</h3>
-          <p>{repo.description}</p>
-          <a href={repo.url}>Visit Repository</a>
-          <p>Tech Stack: {repo.tech_stack}</p>
-        </div>
-      ))}
-    </div>
+    <Router>
+      <Routes>
+        <Route exact path='/' element={<Landingpage/>} />
+        <Route path='/data' element={<Datapage/>} />
+        <Route path="*" element={<div> Not Found or You do not have permission.</div>}/>
+      </Routes>
+    </Router>
   );
 }
 

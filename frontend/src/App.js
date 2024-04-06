@@ -1,26 +1,23 @@
-import react,{ useEffect,useState} from 'react';
+import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  const[data,setData]=useState({})
-  useEffect(()=>{
-    fetchData();
-  },[]);
-
-  const fetchData = async()=>{
-    try{
-      const response= await fetch('https://fuzzy-giggle-5gqvrj495666cvq4j-5000.app.github.dev/repositories');
-      const jsondata=await response.json();
-      setData(jsondata);
-    }
-    catch(error){
-      console.log(error)
-    }
-  }
   return (
     <div className="App">
-       <h7>{data}</h7>
-      
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
     </div>
   );
 }

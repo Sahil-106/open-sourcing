@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './Landingpage.css';
 
 function Landingpage() {
 
@@ -9,7 +9,6 @@ function Landingpage() {
 <head>
     <meta charset="utf-8" />
     <title>Open-sourcing</title>
-    <link href="https://assets.website-files.com/566bb476dd70a5ff30ddc006/css/codecards.c4683a35f.css" rel="stylesheet" type="text/css" />
     <script src="https://gumroad.com/js/gumroad.js"></script>
     <style>
           {`html,

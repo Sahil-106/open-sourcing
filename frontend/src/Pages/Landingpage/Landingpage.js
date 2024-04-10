@@ -10,14 +10,6 @@ function Landingpage() {
     <meta charset="utf-8" />
     <title>Open-sourcing</title>
     <script src="https://gumroad.com/js/gumroad.js"></script>
-    <style>
-          {`html,
-          body {
-              max-width: 100%;
-              overflow-x: hidden;
-              overflow-y: auto;
-          }`}
-        </style>
 </head>
 
 <body>

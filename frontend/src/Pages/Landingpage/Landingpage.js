@@ -9,21 +9,21 @@ function Landingpage() {
     useEffect(() => {
         let layouts = ["final", "plain", "columns", "grid"],
 		container = document.querySelector(".container"),
-		curLayout = 0; // index of the current layout
+		curLayout = 0;
 
         function nextState() {
-        const state = Flip.getState(".letter, .for, .gsap", {props: "color,backgroundColor", simple: true}); // capture current state
+        const state = Flip.getState(".letter, .for, .gsap", {props: "color,backgroundColor", simple: true});
         
-        container.classList.remove(layouts[curLayout]); // remove old class
-        curLayout = (curLayout + 1) % layouts.length;   // increment (loop back to the start if at the end)
-        container.classList.add(layouts[curLayout]);    // add the new class
+        container.classList.remove(layouts[curLayout]); 
+        curLayout = (curLayout + 1) % layouts.length; 
+        container.classList.add(layouts[curLayout]);  
 
-        Flip.from(state, { // animate from the previous state
+        Flip.from(state, { 
             absolute: true,
             stagger: 0.07,
             duration: 0.7,
             ease: "power2.inOut",
-            spin: curLayout === 0, // only spin when going to the "final" layout
+            spin: curLayout === 0, 
             simple: true,
             onEnter: (elements, animation) => gsap.fromTo(elements, {opacity: 0}, {opacity: 1, delay: animation.duration() - 0.1}),
             onLeave: elements => gsap.to(elements, {opacity: 0})
@@ -72,7 +72,7 @@ function Landingpage() {
     <div class="x-section">
         <div class="x-persontags">
             
-            <div class="x-persontagsoverlay" style={{ paddingTop: '400px', paddingBottom: '300px' }}>
+            <div class="x-persontagsoverlay" style={{ paddingTop: '250px', paddingBottom: '300px' }}>
                 <div class="x-wrapper thanks"><img src="https://assets.website-files.com/566bb476dd70a5ff30ddc006/5fdb433c05a8959163762f48_That%27s%20all.svg" loading="lazy" alt="" class="image-2" />
                     <h1 class="x-title large">Thanks to all backers and contributors.</h1>
                     <div class="text-block">Built by   &amp; </div>

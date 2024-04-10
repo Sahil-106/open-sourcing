@@ -1,18 +1,43 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import './Landingpage.css';
+import gsap from 'gsap';
+import { Flip } from 'gsap/all'; 
+
+gsap.registerPlugin(Flip);
 
 function Landingpage() {
+    useEffect(() => {
+        let layouts = ["final", "plain", "columns", "grid"],
+		container = document.querySelector(".container"),
+		curLayout = 0; // index of the current layout
+
+        function nextState() {
+        const state = Flip.getState(".letter, .for, .gsap", {props: "color,backgroundColor", simple: true}); // capture current state
+        
+        container.classList.remove(layouts[curLayout]); // remove old class
+        curLayout = (curLayout + 1) % layouts.length;   // increment (loop back to the start if at the end)
+        container.classList.add(layouts[curLayout]);    // add the new class
+
+        Flip.from(state, { // animate from the previous state
+            absolute: true,
+            stagger: 0.07,
+            duration: 0.7,
+            ease: "power2.inOut",
+            spin: curLayout === 0, // only spin when going to the "final" layout
+            simple: true,
+            onEnter: (elements, animation) => gsap.fromTo(elements, {opacity: 0}, {opacity: 1, delay: animation.duration() - 0.1}),
+            onLeave: elements => gsap.to(elements, {opacity: 0})
+        });
+
+        gsap.delayedCall(curLayout === 0 ? 3.5 : 1.5, nextState);
+        }
+
+        gsap.delayedCall(1, nextState);
+      }, []);
 
   return (
     
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Open-sourcing</title>
-    <script src="https://gumroad.com/js/gumroad.js"></script>
-</head>
-
-<body>
+<div>
     
     <div class="x-section hero">
         <div class="x-heroparticles">
@@ -35,7 +60,15 @@ function Landingpage() {
             <div class="x-buttondisclaimer">No Worries...it&#x27;s free </div>
         </div>
     </div>
-    
+    <div class="banner">
+    <div class="container final">
+            <div class="letter F">F</div>
+            <div class="letter l">U</div>
+            <div class="letter i">C</div>
+            <div class="letter p">K</div>        
+            <div class="gsap">OPEN-SOURCING</div>
+        </div>
+    </div>
     <div class="x-section">
         <div class="x-persontags">
             
@@ -47,13 +80,10 @@ function Landingpage() {
             </div>
             
         </div>
-    </div>
-    <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=566bb476dd70a5ff30ddc006" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script src="https://assets.website-files.com/566bb476dd70a5ff30ddc006/js/codecards.f3982fb4b.js" type="text/javascript"></script>
-   
-</body>
+    
+</div>
+</div>
 
-</html>
   );
 }
 

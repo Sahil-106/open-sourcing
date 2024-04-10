@@ -650,3 +650,89 @@ html.w-mod-js *[data-ix="loader-3"] {
 }
 
 
+/*container final*/
+:root {
+    --color-surface-white: #fffce1;
+    --color-shockingly-green: #0ae448;;
+    --color-lt-green: #abff84;
+    --color-blue: #00bae2;
+    --color-lilac: #9d95ff;
+  }
+
+* {
+    box-sizing: border-box;
+  }
+.banner{
+    
+    height: 400px;
+    margin-top: 150px;
+    margin-bottom: 80px;
+}
+
+  .container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  .container.grid, .container.columns {
+    align-content: stretch;
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+  
+  .letter {
+    text-align: center;
+    color: black;
+    font-size: 10vmax;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 6px;
+  }
+  .container.grid .letter {
+    flex-basis: 50%;
+  }
+  .container.columns .letter {
+    flex-basis: 25%;
+  }
+  .for, .gsap {
+    font-size: 5vmax;
+    color: var(--color-surface-white);
+    position: relative;
+    z-index: -1;
+  }
+  .for {
+    padding: 2px 1.6vmax;
+    font-weight: 300;
+    display: none;
+  }
+  .gsap {
+    padding: 2px 0;
+    font-weight: 600;
+    display: none;
+  }
+  .container.final .for, .container.final .gsap {
+    display: block;
+  }
+  .F {
+    background: var(--color-shockingly-green);
+  }
+  .l {
+    background: var(--color-lt-green);
+  }
+  .i {
+     background: var(--color-blue);
+  }
+  .p {
+    background: var(--color-lilac);
+  }
+  .container.plain .letter {
+    background: transparent;
+    color: var(--color-surface-white);
+    padding: 0;
+  }
+ 

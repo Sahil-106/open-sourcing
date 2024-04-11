@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './Datapage.css';
 
 function Datapage() {
     const [data, setData] = useState([]);
@@ -25,7 +26,7 @@ function Datapage() {
     }
   
     if (loading) {
-      return <div>Loading... We are fetching projects from there source in real time</div>;
+      return <div className='loading'>Loading... We are fetching projects from there source in real time</div>;
     }
   
     if (error) {
@@ -34,14 +35,26 @@ function Datapage() {
   
     return (
       <div className="App">
-        {data && data.map(repo => (
-          <div key={repo.name}>
-            <h3>{repo.name}</h3>
-            <p>{repo.description}</p>
-            <a href={repo.url}>Visit Repository</a>
-            <p>Tech Stack: {repo.tech_stack}</p>
-          </div>
-        ))}
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Repository URL</th>
+              <th>Tech Stack</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data && data.map(repo => (
+              <tr key={repo.name}>
+                <td>{repo.name}</td>
+                <td>{repo.description}</td>
+                <td><a href={repo.url}>Visit Repository</a></td>
+                <td>{repo.tech_stack}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     );
   }

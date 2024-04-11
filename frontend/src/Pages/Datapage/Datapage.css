@@ -1,0 +1,15 @@
+.table {
+    border: 2px solid white;
+    border-collapse: collapse;
+  }
+  
+  .table th,
+  .table td {
+    border: 1px solid white;
+    padding: 8px;
+    color: white; 
+  }
+  .loading{
+    color:white;
+  }
+  

@@ -62,10 +62,10 @@ function Landingpage() {
     </div>
     <div class="banner">
     <div class="container final">
-            <div class="letter F">F</div>
-            <div class="letter l">U</div>
-            <div class="letter i">C</div>
-            <div class="letter p">K</div>        
+            <div class="letter F">K</div>
+            <div class="letter l">E</div>
+            <div class="letter i">E</div>
+            <div class="letter p">P</div>        
             <div class="gsap">OPEN-SOURCING</div>
         </div>
     </div>

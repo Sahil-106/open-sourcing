@@ -17,7 +17,7 @@ def extract_repo_info(repo):
         'tech_stack': repo['language']
     }
 access_token=os.environ.get('git_token')
-
+gitlab_access_token=os.environ.get('lab_token')
 @app.route('/')
 def index():
     return 'index page'
@@ -47,7 +47,7 @@ def fetch_open_source_repositories():
 @app.route('/repogitlab')
 def fetch_gitlab_open_source_repositories():
     headers = {
-        'Private-Token': "glpat-3eP3_6CQ5rqsr2iWpUsD"
+        'Private-Token': gitlab_access_token
     }
     url = 'https://gitlab.com/api/v4/projects'
     params = {

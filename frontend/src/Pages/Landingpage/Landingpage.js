@@ -53,10 +53,7 @@ function Landingpage() {
         <div class="x-wrapper hero">
             <h1 class="x-title large">Open-sourcing<br/>Where even small contribution matters</h1>
             <div class="x-text">Discover ongoing GitHub open-source projects easily. Filter by language, activity, and more. Seamlessly explore repositories. Join us in open collaboration!</div>
-            <a  href="/data" class="x-rainbowbutton w-inline-block">
-                <div>See all projects</div>
-                <div class="x-rainbowbuttonblur"></div>
-            </a>
+            <a href="/data" class="x-rainbowbutton w-inline-block">See all projects</a>
             <div class="x-buttondisclaimer">No Worries...it&#x27;s free </div>
         </div>
     </div>

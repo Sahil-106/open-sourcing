@@ -53,14 +53,24 @@ function Landingpage() {
         <div class="x-wrapper hero">
             <h1 class="x-title large">Open-sourcing<br/>Where even small contribution matters</h1>
             <div class="x-text">Discover ongoing GitHub open-source projects easily. Filter by language, activity, and more. Seamlessly explore repositories. Join us in open collaboration!</div>
-            <a  href="/data" class="x-rainbowbutton w-inline-block">
-                <div>See all projects</div>
-                <div class="x-rainbowbuttonblur"></div>
-            </a>
+            <a href="/data" class="x-rainbowbutton w-inline-block">See all projects</a>
             <div class="x-buttondisclaimer">No Worries...it&#x27;s free </div>
         </div>
     </div>
-    <div class="banner">
+    <div class="x-section">
+        <div class="x-persontags">
+            
+            <div class="x-persontagsoverlay" style={{ paddingTop: '250px', paddingBottom: '150px' }}>
+                <div class="x-wrapper thanks"><img src="https://assets.website-files.com/566bb476dd70a5ff30ddc006/5fdb433c05a8959163762f48_That%27s%20all.svg" loading="lazy" alt="" class="image-2" />
+                    <h1 class="x-title large">Thanks to all backers and contributors.</h1>
+                    <div class="text-block"> </div>
+                </div>
+            </div>
+            
+        </div>
+    
+</div>
+<div class="banner">
     <div class="container final">
             <div class="letter F">K</div>
             <div class="letter l">E</div>
@@ -69,19 +79,6 @@ function Landingpage() {
             <div class="gsap">OPEN-SOURCING</div>
         </div>
     </div>
-    <div class="x-section">
-        <div class="x-persontags">
-            
-            <div class="x-persontagsoverlay" style={{ paddingTop: '250px', paddingBottom: '300px' }}>
-                <div class="x-wrapper thanks"><img src="https://assets.website-files.com/566bb476dd70a5ff30ddc006/5fdb433c05a8959163762f48_That%27s%20all.svg" loading="lazy" alt="" class="image-2" />
-                    <h1 class="x-title large">Thanks to all backers and contributors.</h1>
-                    <div class="text-block">Built by   &amp; </div>
-                </div>
-            </div>
-            
-        </div>
-    
-</div>
 </div>
 
   );

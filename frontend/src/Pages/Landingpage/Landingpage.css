@@ -224,7 +224,7 @@ a {
 }
 
 .x-persontagsoverlay {
-    position: absolute;
+    position: relative;
     left: 0%;
     top: 0%;
     right: 0%;
@@ -665,7 +665,7 @@ html.w-mod-js *[data-ix="loader-3"] {
 .banner{
     
     height: 400px;
-    margin-top: 200px;
+   
     margin-bottom: 120px;
 }
 

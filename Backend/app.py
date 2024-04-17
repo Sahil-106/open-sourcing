@@ -4,6 +4,8 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
 
+
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -20,7 +22,7 @@ def extract_repo_info(repo):
 
 access_token=os.environ.get('git_token')
 gitlab_access_token=os.environ.get('lab_token')
-
+codeberg_access_token=os.environ.get('berg_token')
 
 @app.route('/')
 def index():
@@ -79,6 +81,35 @@ def fetch_gitlab_open_source_repositories():
             return f"Failed to fetch GitLab repositories: {response.status_code}", response.status_code
     except requests.exceptions.RequestException as e:
         return f"Error fetching GitLab repositories: {e}", 500
+
+@app.route('/repocodeberg')
+def fetch_codeberg_open_source_repositories():
+    
+    headers = {
+        'Authorization': f'token {codeberg_access_token}'
+    }
+    url = 'https://codeberg.org/api/v1/repos/search?q=open-source'
+    params = {
+        'limit': 100
+    }
+    
+    try:
+        response = requests.get(url, headers=headers, params=params)
+        if response.status_code == 200:
+            repositories = response.json()['data']
+          
+            repo_info = [{
+                'name': repo['name'],
+                'description': repo['description'],
+                'url': repo['html_url'],
+                'tech_stack': repo.get('language') 
+            } for repo in repositories]
+            return jsonify(repo_info)
+        else:
+            return f"Failed to fetch Codeberg repositories: {response.status_code}", response.status_code
+    except requests.exceptions.RequestException as e:
+        return f"Error fetching Codeberg repositories: {e}", 500
+
 
 if __name__ == '__main__':
     app.run()

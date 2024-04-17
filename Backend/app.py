@@ -76,7 +76,7 @@ def fetch_gitlab_open_source_repositories():
                 'name': repo['name'],
                 'description': repo['description'],
                 'url': repo['web_url'],
-                'last_update':repo['last_activity_at']
+                'last_Update':repo['last_activity_at']
             } for repo in repositories]
             return jsonify(repo_info)
         else:

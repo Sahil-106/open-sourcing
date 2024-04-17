@@ -16,7 +16,7 @@ def extract_repo_info(repo):
         'name': repo['name'],
         'description': repo['description'],
         'url': repo['html_url'],
-        'last Update': repo['updated_at'],
+        'last_Update': repo['updated_at'],
         'tech_stack': repo['language']
     }
 
@@ -76,7 +76,7 @@ def fetch_gitlab_open_source_repositories():
                 'name': repo['name'],
                 'description': repo['description'],
                 'url': repo['web_url'],
-                'last update':repo['last_activity_at']
+                'last_update':repo['last_activity_at']
             } for repo in repositories]
             return jsonify(repo_info)
         else:
@@ -104,7 +104,7 @@ def fetch_codeberg_open_source_repositories():
                 'name': repo['name'],
                 'description': repo['description'],
                 'url': repo['html_url'],
-                'last Update': repo['updated_at'],
+                'last_Update': repo['updated_at'],
                 'tech_stack': repo.get('language') 
             } for repo in repositories]
             return jsonify(repo_info)

@@ -9,7 +9,14 @@
     padding: 8px;
     color: white; 
   }
-  .loading{
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.loading {
+    text-align: center;
     color:white;
-  }
-  
+}

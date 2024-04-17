@@ -56,8 +56,15 @@ function Datapage() {
     }
   
     if (loading) {
-      return <div className='loading'>Loading... We are fetching projects from their source in real-time</div>;
-    }
+      return (
+          <div className="loading-container">
+              <div className="loading">
+                  <img src="loader.gif" alt="Loading..." style={{ width: '300px', height: 'auto' }} />
+                  <p>Loading... We are fetching projects from their source in real-time</p>
+              </div>
+          </div>
+      );
+  }
   
     if (error) {
       return <div>Error: {error}</div>;

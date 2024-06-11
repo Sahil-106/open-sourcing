@@ -3,68 +3,52 @@ import './Datapage.css';
 
 function Datapage() {
     const [data, setData] = useState([]);
-    const [gitlabData, setGitlabData] = useState([]);
-    const [codebergData, setCodebergData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
   
     useEffect(() => {
       fetchData();
-      fetchGitlabData();
-      fetchCodebergData();
     }, []);
   
     const fetchData = async () => {
       try {
-        const response = await fetch('https://open-sourcing.onrender.com/repositories');
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        const jsondata = await response.json();
-        setData(jsondata);
+        const responses = await Promise.all([
+          fetch('https://open-sourcing.onrender.com/repositories'),
+          fetch('https://open-sourcing.onrender.com/repogitlab'),
+          fetch('https://open-sourcing.onrender.com/repocodeberg')
+        ]);
+
+        const jsondata = await Promise.all(responses.map(response => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch data');
+          }
+          return response.json();
+        }));
+
+        const combinedData = [
+          ...jsondata[0].map(repo => ({ ...repo, platform: 'Github' })),
+          ...jsondata[1].map(repo => ({ ...repo, platform: 'Gitlab' })),
+          ...jsondata[2].map(repo => ({ ...repo, platform: 'Codeberg' }))
+        ];
+
+        setData(combinedData);
       } catch (error) {
         setError(error.message);
       } finally {
         setLoading(false);
       }
     }
-
-    const fetchGitlabData = async () => {
-      try {
-        const response = await fetch('https://open-sourcing.onrender.com/repogitlab');
-        if (!response.ok) {
-          throw new Error('Failed to fetch Gitlab data');
-        }
-        const jsondata = await response.json();
-        setGitlabData(jsondata);
-      } catch (error) {
-        setError(error.message);
-      }
-    }
-
-    const fetchCodebergData = async () => {
-      try {
-        const response = await fetch('https://open-sourcing.onrender.com/repocodeberg');
-        if (!response.ok) {
-          throw new Error('Failed to fetch Codeberg data');
-        }
-        const jsondata = await response.json();
-        setCodebergData(jsondata);
-      } catch (error) {
-        setError(error.message);
-      }
-    }
   
     if (loading) {
       return (
-          <div className="loading-container">
-              <div className="loading">
-                  <img src="loader.gif" alt="Loading..." style={{ width: '300px', height: 'auto' }} />
-                  <p>Loading... We are fetching projects from their source in real-time</p>
-              </div>
-          </div>
+        <div className="loading-container">
+            <div className="loading">
+                <img src="loader.gif" alt="Loading..." style={{ width: '300px', height: 'auto' }} />
+                <p>Loading... We are fetching projects from their source in real-time</p>
+            </div>
+        </div>
       );
-  }
+    }
   
     if (error) {
       return <div>Error: {error}</div>;
@@ -84,34 +68,14 @@ function Datapage() {
             </tr>
           </thead>
           <tbody>
-            {data && data.map(repo => (
+            {data.map(repo => (
               <tr key={repo.name}>
                 <td>{repo.name}</td>
                 <td>{repo.description}</td>
-                <td><span>Github</span></td>
+                <td><span>{repo.platform}</span></td>
                 <td>{repo.last_Update}</td>
                 <td><a href={repo.url}>Visit Repository</a></td>
-                <td>{repo.tech_stack}</td>
-              </tr>
-            ))}
-            {gitlabData && gitlabData.map(repo => (
-              <tr key={repo.name}>
-                <td>{repo.name}</td>
-                <td>{repo.description}</td>
-                <td><span>Gitlab</span></td>
-                <td>{repo.last_Update}</td>
-                <td><a href={repo.url}>Visit Repository</a></td>
-                <td>{/* No Tech Stack */}</td>
-              </tr>
-            ))}
-            {codebergData && codebergData.map(repo => (
-              <tr key={repo.name}>
-                <td>{repo.name}</td>
-                <td>{repo.description}</td>
-                <td><span>Codeberg</span></td>
-                <td>{repo.last_Update}</td>
-                <td><a href={repo.url}>Visit Repository</a></td>
-                <td>{repo.tech_stack}</td>
+                <td>{repo.tech_stack || 'N/A'}</td>
               </tr>
             ))}
           </tbody>

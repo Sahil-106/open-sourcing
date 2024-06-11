@@ -5,6 +5,7 @@ function Datapage() {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [searchQuery, setSearchQuery] = useState('');
   
     useEffect(() => {
       fetchData();
@@ -53,9 +54,27 @@ function Datapage() {
     if (error) {
       return <div>Error: {error}</div>;
     }
+
+    const handleSearch = (event) => {
+      setSearchQuery(event.target.value);
+    };
+
+    const filteredData = searchQuery === ''
+      ? data
+      : data.filter(repo => 
+          (repo.tech_stack && repo.tech_stack.toLowerCase().includes(searchQuery.toLowerCase()))
+        );
   
     return (
       <div className="App">
+        <div className="search-bar">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={handleSearch}
+          />
+        </div>
         <table className="table">
           <thead>
             <tr>
@@ -68,7 +87,7 @@ function Datapage() {
             </tr>
           </thead>
           <tbody>
-            {data.map(repo => (
+            {filteredData.map(repo => (
               <tr key={repo.name}>
                 <td>{repo.name}</td>
                 <td>{repo.description}</td>
